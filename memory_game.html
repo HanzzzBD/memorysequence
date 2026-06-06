@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Sequence Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <!-- GAME OVER OVERLAY (alternatif dari alert) -->
+    <div id="goOverlay">
+      <div class="go-title">Game Over</div>
+      <div class="go-msg">Halo <strong id="goName"></strong>, kamu gagal di level <strong id="goLevel"></strong>!</div>
+      <div class="go-score" id="goScore">0</div>
+      <div class="go-sub">Skor akhir</div>
+      <div class="go-sub" id="goHS"></div>
+      <button class="btn btn-success" style="width:160px;margin-top:8px" onclick="restartGame()">🔄 Main Lagi</button>
+      <button class="btn btn-danger"  style="width:160px" onclick="backToMenu()">🏠 Menu Utama</button>
+    </div>
+
+    <h1>Memory Sequence</h1>
+    <p class="subtitle">Ingat urutan kotak yang menyala!</p>
+
+    <!-- SETUP -->
+    <div id="setupSection">
+      <input type="text" id="usernameInput" placeholder="Masukkan username..." maxlength="20"
+        onkeydown="if(event.key==='Enter') startGame()">
+      <div class="err" id="errMsg"></div>
+
+      <div style="display:flex;gap:8px;align-items:center;font-size:13px;color:#888">
+        <span>Nyawa:</span>
+        <select id="livesSelect" style="border:1.5px solid #e0e0e0;border-radius:8px;padding:4px 8px;font-size:13px;outline:none;">
+          <option value="1">1 ❤️ (Hard)</option>
+          <option value="3" selected>3 ❤️ (Normal)</option>
+          <option value="5">5 ❤️ (Easy)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" id="playBtn" onclick="startGame()">▶ Play</button>
+
+      <div style="text-align:center;font-size:12px;color:#bbb;margin-top:4px">
+        High Score: <span id="hsDisplay" style="color:#6c63ff;font-weight:600">0</span>
+      </div>
+    </div>
+    
+    <!-- GAME -->
+    <div id="gameSection">
+      <div class="top-bar">
+        <div class="greeting">Halo, <span id="nameDisplay"></span>!</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-label">Level</div>
+              <div class="stat-val" id="levelDisplay">1</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Score</div>
+              <div class="stat-val" id="scoreDisplay">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nyawa -->
+      <div class="lives" id="livesDisplay"></div>
+
+      <!-- Progress klik pemain -->
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="status-bar" id="statusBar">Bersiap...</div>
+
+      <!-- Dot indicator urutan -->
+      <div class="seq-dots" id="seqDots"></div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="footer-row">
+        <div class="hs-text">Best: <span id="hsDisplay2">0</span></div>
+        <button class="btn btn-danger" id="restartBtn"
+          style="display:none;width:auto;padding:6px 14px;font-size:13px;margin:0"
+          onclick="restartGame()">Restart</button>
+      </div>
+    </div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
